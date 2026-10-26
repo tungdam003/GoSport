@@ -1,0 +1,266 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoSport - Đặt sân thể thao trực tuyến</title>
+    <link rel="stylesheet" href="{% static 'booking/style.css' %}">
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+    <a href="{% url 'home' %}" class="logo">Go<span>Sport</span></a>
+    
+    <nav class="nav-links">
+        <a href="{% url 'home' %}">Trang chủ</a>
+        <a href="#courts">Danh sách sân</a>
+        <a href="#promotions">Ưu đãi</a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'booking_history' %}">Lịch đặt của tôi</a>
+        {% endif %}
+    </nav>
+
+    <div class="auth-actions">
+        {% if user.is_authenticated %}
+            <span style="color: #20e879; font-weight: bold; margin-right: 15px;">Hi, {{ user.username }}</span>
+            <form action="{% url 'user_logout' %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn-logout" style="background: transparent; border: 1px solid #20e879; color: #20e879; padding: 6px 14px; border-radius: 6px; cursor: pointer;">Đăng xuất</button>
+            </form>
+        {% else %}
+            <a href="{% url 'user_login' %}" style="color: #cbd5e1; text-decoration: none; margin-right: 15px;">Đăng nhập</a>
+            <a href="{% url 'register' %}" class="btn" style="padding: 8px 16px; background: #20e879; color: #04140b; border-radius: 6px; text-decoration: none; font-weight: bold;">Đăng ký</a>
+        {% endif %}
+    </div>
+</header>
+
+<!-- MAIN CONTENT -->
+<main>
+    <!-- 1. DANH SÁCH SÂN & TIÊU ĐỀ HOÀNH TRÁNG -->
+    <section class="court-section" id="courts" style="padding: 60px 5% 40px; max-width: 1200px; margin: 0 auto;">
+        
+        <!-- Tiêu đề lớn phong cách High Performance Arena -->
+        <div style="text-align: center; margin-bottom: 40px;">
+            <div style="display: inline-block; padding: 6px 16px; background: rgba(32, 232, 121, 0.1); border: 1px solid rgba(32, 232, 121, 0.3); border-radius: 20px; margin-bottom: 15px;">
+                <span style="color: #20e879; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px;">🔥 HIGH PERFORMANCE ARENA</span>
+            </div>
+            
+            <h1 style="color: #fff; font-size: 38px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 15px; line-height: 1.2;">
+                CHỌN SÂN ĐẤU - <span style="color: #20e879;">BỨC PHÁ GIỚI HẠN</span>
+            </h1>
+            
+            <p style="color: #94a3b8; font-size: 14px; max-width: 700px; margin: 0 auto; line-height: 1.6;">
+                Trải nghiệm hệ thống đặt sân thi đấu chuyên nghiệp, hệ thống chiếu sáng chuẩn và thảm đấu cao cấp. Lựa chọn sân và xem thông tin chi tiết.
+            </p>
+        </div>
+
+        <!-- Thanh bộ lọc môn thể thao & Thanh tìm kiếm ngang hàng -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 15px; background: #111c2e; padding: 16px 20px; border-radius: 12px; border: 1px solid #1e293b;">
+            
+            <!-- Các nút lọc môn thể thao (AJAX Tab không tải lại trang) -->
+            <div class="sport-filter-tabs" style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <button type="button" class="filter-btn active" onclick="filterSport('all', this)" style="padding: 7px 16px; border-radius: 20px; border: 1px solid #20e879; background: #20e879; color: #050a13; font-weight: bold; font-size: 13px; cursor: pointer;">Tất cả</button>
+                {% for sport in sports %}
+                <button type="button" class="filter-btn" onclick="filterSport('sport-{{ sport.id }}', this)" style="padding: 7px 16px; border-radius: 20px; border: 1px solid #263449; background: #0b1220; color: #cbd5e1; font-weight: 600; font-size: 13px; cursor: pointer;">{{ sport.name }}</button>
+                {% endfor %}
+            </div>
+
+            <!-- Thanh tìm kiếm -->
+            <form method="get" action="" style="display: flex; gap: 8px; align-items: center;">
+                <input type="text" name="q" placeholder="Tìm tên sân, địa điểm..." value="{{ request.GET.q }}" style="padding: 9px 14px; background: #0b1220; border: 1px solid #263449; border-radius: 8px; color: #fff; font-size: 13px; width: 220px; outline: none;">
+                <button type="submit" style="padding: 9px 16px; background: #20e879; color: #050a13; border: none; border-radius: 8px; font-weight: bold; font-size: 13px; cursor: pointer;">Tìm kiếm</button>
+            </form>
+        </div>
+
+        <!-- Lưới hiển thị các sân thể thao -->
+        <div class="court-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px;">
+            {% for court in courts %}
+                <article class="court-card-item" data-sport="sport-{{ court.sport.id }}" style="background: #111c2e; border: 1px solid #1e293b; border-radius: 14px; overflow: hidden; display: flex; flex-direction: column;">
+                    <div class="court-image" style="height: 180px; position: relative; overflow: hidden;">
+                        {% if court.sport.name == "Cầu lông" %}
+                            {% if "2" in court.name %}
+                                <img src="{% static 'booking/images/caulong2.jpg' %}" alt="Sân cầu lông 2" style="width: 100%; height: 100%; object-fit: cover;">
+                            {% else %}
+                                <img src="{% static 'booking/images/caulong1.jpg' %}" alt="Sân cầu lông 1" style="width: 100%; height: 100%; object-fit: cover;">
+                            {% endif %}
+                        {% elif court.sport.name == "Bóng đá" %}
+                            {% if "2" in court.name %}
+                                <img src="{% static 'booking/images/sanbong2.jpg' %}" alt="Sân bóng đá 2" style="width: 100%; height: 100%; object-fit: cover;">
+                            {% else %}
+                                <img src="{% static 'booking/images/sanbong1.jpg' %}" alt="Sân bóng đá 1" style="width: 100%; height: 100%; object-fit: cover;">
+                            {% endif %}
+                        {% elif court.sport.name == "Pickleball" %}
+                            <img src="{% static 'booking/images/pickleball.jpg' %}" alt="Sân Pickleball" style="width: 100%; height: 100%; object-fit: cover;">
+                        {% elif court.sport.name == "Bóng bàn" %}
+                            {% if "2" in court.name %}
+                                <img src="{% static 'booking/images/bongban2.jpg' %}" alt="Sân bóng bàn 2" style="width: 100%; height: 100%; object-fit: cover;">
+                            {% else %}
+                                <img src="{% static 'booking/images/bongban1.jpg' %}" alt="Sân bóng bàn 1" style="width: 100%; height: 100%; object-fit: cover;">
+                            {% endif %}
+                        {% elif court.sport.name == "Bóng chuyền" %}
+                            <img src="{% static 'booking/images/bongchuyen.jpg' %}" alt="Sân bóng chuyền" style="width: 100%; height: 100%; object-fit: cover;">
+                        {% else %}
+                            <img src="{% static 'booking/images/caulong1.jpg' %}" alt="Sân" style="width: 100%; height: 100%; object-fit: cover;">
+                        {% endif %}
+                        <span style="position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.7); color: #20e879; padding: 4px 10px; font-size: 11px; font-weight: bold; border-radius: 4px;">{{ court.sport.name }}</span>
+                    </div>
+
+                    <div class="court-info" style="padding: 20px; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between;">
+                        <div>
+                            <h3 style="margin: 0 0 8px; color: #fff; font-size: 18px;">{{ court.name }}</h3>
+                            <p class="court-location" style="margin: 4px 0; color: #94a3b8; font-size: 13px;">📍 {{ court.location }}</p>
+                            <p class="court-description" style="margin: 8px 0 15px; color: #cbd5e1; font-size: 13px; line-height: 1.4;">
+                                {{ court.description|default:"Sân thể thao chất lượng cao, thoáng mát, sẵn sàng phục vụ." }}
+                            </p>
+                        </div>
+
+                        <div class="court-bottom" style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #1e293b; padding-top: 15px; margin-top: 10px;">
+                            <div>
+                                <span class="price-label" style="font-size: 11px; color: #94a3b8; display: block;">Giá thuê</span>
+                                <p class="court-price" style="margin: 0; color: #20e879; font-weight: bold; font-size: 16px;">
+                                    {{ court.formatted_price }} <small style="font-size: 11px; color: #94a3b8; font-weight: normal;">VNĐ/h</small>
+                                </p>
+                            </div>
+
+                            {% if user.is_authenticated %}
+                                <a href="{% url 'book_court' court.id %}" class="btn" style="padding: 8px 16px; background: #20e879; color: #04140b; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 13px;">Đặt sân</a>
+                            {% else %}
+                                <a href="{% url 'user_login' %}" class="btn" style="padding: 8px 16px; background: #20e879; color: #04140b; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 13px;">Đặt sân</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </article>
+            {% empty %}
+                <div class="empty-state" style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #94a3b8;">
+                    <h3>Chưa có sân thể thao nào</h3>
+                    <p>Hiện chưa có dữ liệu sân phù hợp.</p>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- 2. PHƯƠNG THỨC THANH TOÁN & TIỆN ÍCH -->
+    <section class="features-section" style="padding: 40px 5%; background: #070e17; border-top: 1px solid #1e293b; border-bottom: 1px solid #1e293b; margin: 40px 0;">
+        <div class="features-wrapper" style="max-width: 1200px; margin: 0 auto;">
+            <div class="features-heading" style="text-align: center; margin-bottom: 30px;">
+                <span class="section-tag" style="color: #20e879; font-size: 12px; font-weight: bold;">TRẢI NGHIỆM ĐẶT SÂN TỐI ƯU</span>
+                <h2 style="color: #fff; font-size: 24px; margin: 5px 0 0;">Giúp người chơi tìm được sân ưng ý chỉ trong vài cú click</h2>
+            </div>
+
+            <div class="features-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+                <div class="feature-card" style="background: #111c2e; padding: 24px; border-radius: 12px; border: 1px solid #1e293b;">
+                    <div class="feature-icon" style="font-size: 24px; margin-bottom: 10px;">⏱</div>
+                    <h3 style="color: #fff; margin: 0 0 8px; font-size: 16px;">Lịch Trống Real-time</h3>
+                    <p style="color: #94a3b8; font-size: 13px; margin: 0; line-height: 1.5;">Cập nhật ngay tức thì danh sách khung giờ còn trống từ chủ sân, không lo trùng lịch.</p>
+                </div>
+
+                <div class="feature-card" style="background: #111c2e; padding: 24px; border-radius: 12px; border: 1px solid #1e293b;">
+                    <div class="feature-icon" style="font-size: 24px; margin-bottom: 10px;">💳</div>
+                    <h3 style="color: #fff; margin: 0 0 8px; font-size: 16px;">Thanh Toán Đa Dạng</h3>
+                    <p style="color: #94a3b8; font-size: 13px; margin: 0; line-height: 1.5;">Hỗ trợ chuyển khoản ngân hàng hoặc trả tiền mặt trực tiếp tại sân dễ dàng.</p>
+                </div>
+
+                <div class="feature-card" style="background: #111c2e; padding: 24px; border-radius: 12px; border: 1px solid #1e293b;">
+                    <div class="feature-icon" style="font-size: 24px; margin-bottom: 10px;">⭐</div>
+                    <h3 style="color: #fff; margin: 0 0 8px; font-size: 16px;">Đánh Giá Thực Tế</h3>
+                    <p style="color: #94a3b8; font-size: 13px; margin: 0; line-height: 1.5;">Xem hình ảnh, chất lượng ánh sáng, dịch vụ đi kèm từ cộng đồng thể thao thực tế.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. ƯU ĐÃI GOSPORT -->
+    <section id="promotions" class="promotion-section" style="padding: 20px 5% 50px; max-width: 900px; margin: 0 auto;">
+        <div class="promotion-container" style="background: #111c2e; border: 1px solid #20e879; border-radius: 16px; padding: 30px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
+            <div>
+                <span class="promotion-tag" style="color: #20e879; font-size: 12px; font-weight: bold;">ƯU ĐÃI DÀNH CHO BẠN</span>
+                <h2 style="color: #fff; margin: 5px 0; font-size: 22px;">Đặt sân tiết kiệm hơn với mã GOSPORT2026!</h2>
+                <p style="color: #94a3b8; font-size: 13px; margin: 0;">Sao chép mã để áp dụng giảm giá trực tiếp khi thanh toán.</p>
+            </div>
+            <button type="button" class="btn voucher-btn" onclick="navigator.clipboard.writeText('GOSPORT2026').then(() => alert('Đã sao chép mã GOSPORT2026!'))" style="padding: 12px 24px; background: #20e879; color: #04140b; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">
+                Sao chép mã
+            </button>
+        </div>
+    </section>
+</main>
+
+<!-- FOOTER CHUẨN 4 CỘT -->
+<footer class="site-footer">
+    <div class="footer-top">
+        <div class="footer-col footer-brand">
+            <div class="footer-logo">
+                <span class="logo-icon">⚽</span>
+                <h2>Go<span>Sport</span></h2>
+            </div>
+            <p>Hệ thống đặt sân thể thao trực tuyến hàng đầu. Tìm kiếm sân, giữ chỗ và thanh toán tiện lợi chỉ trong 30s.</p>
+        </div>
+
+        <div class="footer-col">
+            <h4>MÔN THỂ THAO</h4>
+            <ul>
+                <li><a href="#">Sân Bóng Đá Cỏ Nhân Tạo</a></li>
+                <li><a href="#">Sân Cầu Lông Trong Nhà</a></li>
+                <li><a href="#">Sân Pickleball Chuẩn Quốc Tế</a></li>
+                <li><a href="#">Sân Bóng Bàn Chuyên Nghiệp</a></li>
+                <li><a href="#">Sân Bóng Chuyền Đạt Chuẩn</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>HỖ TRỢ KHÁCH HÀNG</h4>
+            <ul>
+                <li><a href="#">Hướng dẫn đặt sân</a></li>
+                <li><a href="#">Chính sách hủy sân & hoàn tiền</a></li>
+                <li><a href="#">Dành cho chủ sân hợp tác</a></li>
+                <li><a href="tel:19006868">Hotline: 1900 6868</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>KẾT NỐI</h4>
+            <div class="social-links">
+                <a href="#" class="social-btn" title="Facebook">f</a>
+                <a href="#" class="social-btn" title="Youtube">▶</a>
+                <a href="#" class="social-btn" title="Tiktok">🎵</a>
+            </div>
+            <p class="footer-address">
+    <b>Địa chỉ:</b> 122 Vĩnh Hưng, Q. Hoàng Mai, Hà Nội<br>
+    <b>Số điện thoại:</b> 1900 8386<br>
+    <b>Gmail:</b> gosport@gmail.com
+</p>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 GoSport Booking Platform. Tất cả quyền được bảo lưu.</p>
+    </div>
+</footer>
+
+<!-- SCRIPT LỌC MÔN THỂ THAO KHÔNG RELOAD TRANG -->
+<script>
+function filterSport(sportClass, buttonElement) {
+    const buttons = document.querySelectorAll('.filter-btn');
+    buttons.forEach(btn => {
+        btn.style.background = '#0b1220';
+        btn.style.color = '#cbd5e1';
+        btn.style.borderColor = '#263449';
+    });
+    buttonElement.style.background = '#20e879';
+    buttonElement.style.color = '#050a13';
+    buttonElement.style.borderColor = '#20e879';
+
+    const cards = document.querySelectorAll('.court-card-item');
+    cards.forEach(card => {
+        if (sportClass === 'all' || card.getAttribute('data-sport') === sportClass) {
+            card.style.display = 'flex';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+</script>
+
+</body>
+</html>

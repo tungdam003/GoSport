@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký tài khoản - GoSport</title>
+    <link rel="stylesheet" href="{% static 'booking/style.css' %}">
+</head>
+<body>
+
+<main class="auth-main-container">
+    <div class="auth-split-card">
+        
+        <!-- CỘT TRÁI: Form đăng ký -->
+        <div class="auth-form-side">
+            <div class="auth-header">
+                <h2>Đăng ký tài khoản</h2>
+                <p>Tham gia ngay cùng GoSport để đặt sân nhanh chóng.</p>
+            </div>
+
+            {% if messages %}
+                <div class="auth-messages">
+                    {% for message in messages %}
+                        <p class="error-msg">{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <form method="post" class="form-container-split">
+                {% csrf_token %}
+
+                <label for="username">Tên đăng nhập</label>
+                <input type="text" id="username" name="username" required autocomplete="username">
+
+                <label for="password">Mật khẩu</label>
+                <input type="password" id="password" name="password" required autocomplete="new-password">
+
+                <label for="confirm_password">Xác nhận mật khẩu</label>
+                <input type="password" id="confirm_password" name="confirm_password" required autocomplete="new-password">
+
+                <button type="submit" class="btn">Đăng ký</button>
+            </form>
+
+            <div class="auth-footer-text">
+                <p>Đã có tài khoản? <a href="{% url 'user_login' %}">Đăng nhập ngay</a></p>
+            </div>
+        </div>
+
+        <!-- ĐƯỜNG CHÉO NGĂN CÁCH MỜ ẢO -->
+        <div class="auth-diagonal-line"></div>
+
+        <!-- CỘT PHẢI: Ảnh mẫu thể thao -->
+        <div class="auth-image-side">
+            <img src="{% static 'booking/images/sanbong2.jpg' %}" alt="Ảnh mẫu GoSport">
+            <div class="auth-image-overlay">
+                <h3>GoSport Booking</h3>
+                <p>Hệ thống đặt sân thể thao trực tuyến hàng đầu.</p>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+</body>
+</html>

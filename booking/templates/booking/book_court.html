@@ -1,0 +1,427 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt sân thể thao - GoSport</title>
+    <link rel="stylesheet" href="{% static 'booking/style.css' %}">
+    <style>
+        body {
+            background-color: #050a13;
+            color: #f1f5f9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .site-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 40px;
+            background: #0b1220;
+            border-bottom: 1px solid #1e293b;
+        }
+
+        .site-header .logo {
+            font-size: 20px;
+            font-weight: 800;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: 0.5px;
+        }
+
+        .site-header .logo span {
+            color: #20e879;
+        }
+
+        .site-header a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .site-header a:hover {
+            color: #20e879;
+        }
+
+        .booking-main-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 80px);
+            padding: 30px 20px;
+            box-sizing: border-box;
+        }
+
+        .booking-card {
+            display: flex;
+            width: 100%;
+            max-width: 950px;
+            background: #111c2e;
+            border: 1px solid #1e293b;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .booking-form-col {
+            flex: 1.2;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+
+        .booking-header-tag {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #20e879;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .booking-card h2 {
+            font-size: 22px;
+            font-weight: 700;
+            margin: 0 0 15px;
+            color: #f1f5f9;
+        }
+
+        .court-meta {
+            background: #0b1220;
+            padding: 14px 18px;
+            border-radius: 12px;
+            border: 1px solid #1e293b;
+            margin-bottom: 20px;
+        }
+
+        .court-meta h3 {
+            margin: 0 0 6px;
+            font-size: 16px;
+            color: #fff;
+        }
+
+        .court-meta p {
+            margin: 3px 0;
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        .court-price-tag {
+            color: #20e879;
+            font-size: 18px;
+            font-weight: 700;
+            margin-top: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #cbd5e1;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px 14px;
+            background: #0b1220;
+            border: 1px solid #263449;
+            border-radius: 8px;
+            color: #f1f5f9;
+            font-size: 13px;
+            box-sizing: border-box;
+            transition: all 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #20e879;
+            box-shadow: 0 0 8px rgba(32, 232, 121, 0.25);
+        }
+
+        .promo-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .btn-apply {
+            padding: 10px 16px;
+            background: #1e293b;
+            color: #20e879;
+            border: 1px solid #20e879;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+            height: 41px;
+        }
+
+        .btn-apply:hover {
+            background: #20e879;
+            color: #04140b;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            background: #20e879;
+            color: #04140b;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-submit:hover {
+            background: #17c664;
+        }
+
+        .booking-image-col {
+            flex: 1;
+            position: relative;
+            background: #0b1220;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            overflow: hidden;
+            border-left: 1px solid #1e293b;
+        }
+
+        .booking-image-col img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.85;
+            transition: transform 0.5s ease;
+        }
+
+        .image-overlay-content {
+            position: relative;
+            z-index: 2;
+            padding: 30px;
+            background: linear-gradient(to top, rgba(5, 10, 19, 0.95) 20%, rgba(5, 10, 19, 0.4) 70%, transparent 100%);
+        }
+
+        .image-overlay-content h4 {
+            margin: 0 0 5px;
+            font-size: 16px;
+            color: #20e879;
+        }
+
+        .image-overlay-content p {
+            margin: 0;
+            font-size: 12px;
+            color: #cbd5e1;
+            line-height: 1.4;
+        }
+
+        .message-box {
+            padding: 10px 14px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            background: rgba(32, 232, 121, 0.1);
+            color: #20e879;
+            border: 1px solid rgba(32, 232, 121, 0.3);
+            font-size: 13px;
+        }
+
+        @media (max-width: 768px) {
+            .booking-card {
+                flex-direction: column;
+            }
+            .booking-form-col {
+                padding: 25px 20px;
+            }
+            .booking-image-col {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <a href="{% url 'home' %}" class="logo">Sport<span>Hub</span></a>
+    <a href="{% url 'home' %}">← Quay lại trang chủ</a>
+</header>
+
+<main class="booking-main-wrapper">
+    <div class="booking-card">
+        
+        <!-- CỘT TRÁI: FORM VÀ MÃ ƯU ĐÃI -->
+        <div class="booking-form-col">
+            <span class="booking-header-tag">Sports Booking System</span>
+            <h2>Xác nhận đặt sân</h2>
+
+            <!-- Thông tin tóm tắt sân kèm giá động -->
+            <div class="court-meta">
+                <h3>{{ court.name }}</h3>
+                <p>⚽ Môn thể thao: <b>{{ court.sport.name }}</b></p>
+                <p>📍 Địa điểm: {{ court.location }}</p>
+                <!-- Thêm thuộc tính data-base-price để JS nhận diện giá gốc chuẩn -->
+                <div class="court-price-tag" id="display-price" data-base-price="{{ court.price }}">
+                    {{ court.formatted_price }} <small style="font-size: 12px; color: #94a3b8; font-weight: normal;">VNĐ / 1 giờ</small>
+                </div>
+            </div>
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="message-box">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+
+            <form method="post" id="booking-form">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="booking_date">Ngày đặt sân</label>
+                    <input type="date" id="booking_date" name="booking_date" value="{{ selected_date }}" min="{{ today }}" required onchange="reloadTimeSlots(this.value)">
+                </div>
+
+                <div class="form-group">
+                    <label for="time_slot">Khung giờ</label>
+                    <select id="time_slot" name="time_slot" required>
+                        <option value="">-- Chọn khung giờ trống --</option>
+                        {% for slot in time_slots %}
+                            <option value="{{ slot.id }}">{{ slot }}</option>
+                        {% empty %}
+                            <option value="" disabled>Không còn khung giờ trống trong ngày này</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="full_name">Họ và tên người đặt</label>
+                    <input type="text" id="full_name" name="full_name" placeholder="Nhập họ và tên..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone_number">Số điện thoại liên hệ</label>
+                    <input type="tel" id="phone_number" name="phone_number" placeholder="Nhập số điện thoại..." required>
+                </div>
+
+                <!-- Ô NHẬP MÃ ƯU ĐÃI -->
+                <div class="form-group">
+                    <label for="promo_code">Mã ưu đãi / Giảm giá</label>
+                    <div class="promo-wrapper">
+                        <input type="text" id="promo_code" name="promo_code" placeholder="Nhập mã (Mã có ở trang chủ)..." style="text-transform: uppercase;">
+                        <button type="button" class="btn-apply" onclick="applyPromoCode()">Áp dụng</button>
+                    </div>
+                    <p id="promo-msg" style="font-size: 11px; margin: 5px 0 0; color: #94a3b8;"></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="payment_method">Hình thức thanh toán</label>
+                    <select id="payment_method" name="payment_method" required onchange="togglePolicyInfo(this.value)">
+                        <option value="">-- Chọn hình thức thanh toán --</option>
+                        <option value="CASH">Tiền mặt (Thanh toán tại sân)</option>
+                        <option value="BANK">Chuyển khoản ngân hàng (Giữ sân nhanh)</option>
+                    </select>
+                </div>
+
+                <div id="policy-box" style="margin-bottom: 15px; padding: 12px; background: #0b1220; border-left: 3px solid #20e879; border-radius: 6px; font-size: 12px; color: #cbd5e1;">
+                    <p id="policy-text" style="margin: 0;">💡 <b>Chính sách GoSport:</b> Chọn phương thức thanh toán để xem chi tiết điều khoản hủy cọc & bùng sân.</p>
+                </div>
+
+                <button type="submit" class="btn-submit">Xác nhận đặt sân</button>
+            </form>
+        </div>
+
+        <!-- CỘT PHẢI: ẢNH MẪU -->
+        <div class="booking-image-col">
+            {% if court.sport.name == "Cầu lông" %}
+                <img src="{% static 'booking/images/caulong1.jpg' %}" alt="Sân Cầu lông">
+            {% elif court.sport.name == "Bóng đá" %}
+                <img src="{% static 'booking/images/sanbong1.jpg' %}" alt="Sân Bóng đá">
+            {% elif court.sport.name == "Bóng bàn" %}
+                <img src="{% static 'booking/images/bongban1.jpg' %}" alt="Sân Bóng bàn">
+            {% elif court.sport.name == "Pickleball" %}
+                <img src="{% static 'booking/images/pickleball.jpg' %}" alt="Sân Pickleball">
+            {% elif court.sport.name == "Bóng chuyền" %}
+                <img src="{% static 'booking/images/bongchuyen.jpg' %}" alt="Sân Bóng chuyền">
+            {% else %}
+                <img src="{% static 'booking/images/caulong1.jpg' %}" alt="Ảnh sân thể thao">
+            {% endif %}
+
+            <div class="image-overlay-content">
+                <h4>{{ court.name }}</h4>
+                <p>Không gian thể thao chuyên nghiệp, trang thiết bị hiện đại sẵn sàng phục vụ trận đấu của bạn.</p>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<script>
+function reloadTimeSlots(selectedDate) {
+    const currentUrl = window.location.origin + window.location.pathname;
+    window.location.href = currentUrl + '?booking_date=' + selectedDate;
+}
+
+// Hàm tính toán và thay đổi giá tiền động khi nhập mã giảm giá
+function applyPromoCode() {
+    const code = document.getElementById('promo_code').value.trim().toUpperCase();
+    const priceElement = document.getElementById('display-price');
+    const basePrice = parseFloat(priceElement.getAttribute('data-base-price')) || 60000; // Giá mặc định dự phòng
+    const promoMsg = document.getElementById('promo-msg');
+    
+    if (code === 'GOSPORT2026') {
+        const discountedPrice = basePrice * 0.8; // Giảm 20%
+        priceElement.innerHTML = formatCurrency(discountedPrice) + ' <small style="font-size: 12px; color: #20e879; font-weight: bold;">(Đã giảm 20%)</small> <small style="font-size: 12px; color: #94a3b8; font-weight: normal;">VNĐ / 1 giờ</small>';
+        promoMsg.style.color = '#20e879';
+        promoMsg.innerHTML = '✔ Áp dụng mã GOSPORT20 thành công (-20%)!';
+    } else if (code === '') {
+        priceElement.innerHTML = formatCurrency(basePrice) + ' <small style="font-size: 12px; color: #94a3b8; font-weight: normal;">VNĐ / 1 giờ</small>';
+        promoMsg.innerHTML = '';
+    } else {
+        priceElement.innerHTML = formatCurrency(basePrice) + ' <small style="font-size: 12px; color: #94a3b8; font-weight: normal;">VNĐ / 1 giờ</small>';
+        promoMsg.style.color = '#ef4444';
+        promoMsg.innerHTML = '✖ Mã ưu đãi không hợp lệ hoặc đã hết hạn!';
+    }
+}
+
+function formatCurrency(amount) {
+    return new Intl.NumberFormat('vi-VN').format(amount);
+}
+
+function togglePolicyInfo(method) {
+    const policyText = document.getElementById('policy-text');
+    if (method === 'BANK') {
+        policyText.innerHTML = `💳 <b>Thanh toán qua ngân hàng:</b><br>
+        • Hủy sớm (Trước 12-24h): Hoàn 100% tiền cọc hoặc dời lịch miễn phí.<br>
+        • Hủy sát giờ (Dưới 4-6h / Giờ cao điểm): Phạt 100% tiền cọc.<br>
+        • Trường hợp bất khả kháng (Mưa lớn, sự cố sân): Hoàn tiền 100%.`;
+    } else if (method === 'CASH') {
+        policyText.innerHTML = `💵 <b>Thanh toán tiền mặt tại sân:</b><br>
+        • <i>Lưu ý khung giờ vàng (17h - 21h):</i> Yêu cầu chuyển khoản cọc.<br>
+        • Vi phạm quy chế bùng lịch lần 2 sẽ bị đưa vào danh sách Blacklist và khóa tài khoản tạm thời.`;
+    } else {
+        policyText.innerHTML = `💡 <b>Chính sách GoSport:</b> Chọn phương thức thanh toán để xem chi tiết điều khoản.`;
+    }
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1726 @@
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #f5f7f6;
+    color: #24332c;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+}
+
+/* ===== THANH ĐIỀU HƯỚNG ===== */
+.site-header {
+    min-height: 78px;
+    padding: 14px 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    background: rgba(255, 255, 255, 0.97);
+    border-bottom: 1px solid #e2ebe5;
+    box-shadow: 0 3px 14px rgba(6, 78, 59, 0.04);
+    position: relative;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 29px;
+    font-weight: 900;
+    color: #064e3b;
+    letter-spacing: -1.2px;
+    white-space: nowrap;
+}
+
+.logo span {
+    color: #10a36d;
+}
+
+.nav-links,
+.account {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.nav-links a,
+.account > a,
+.account > span {
+    font-size: 14px;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.nav-links a {
+    position: relative;
+    padding: 8px 0;
+}
+
+.account form {
+    margin: 0;
+}
+
+/* ===== NÚT ===== */
+.btn {
+    display: inline-block;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    background: #07865b;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.btn:hover {
+    background: #066747;
+    transform: translateY(-1px);
+}
+
+.btn-outline {
+    background: white;
+    color: #087f5b;
+    border: 1px solid #087f5b;
+}
+
+.btn-outline:hover {
+    background: #eaf8f0;
+    color: #066747;
+}
+
+/* ===== KHU VỰC GIỚI THIỆU ===== */
+.hero {
+    position: relative;
+    overflow: hidden;
+    padding: 85px 8%;
+    min-height: 430px;
+    display: flex;
+    align-items: center;
+    background:
+        radial-gradient(
+            circle at 85% 20%,
+            rgba(110, 231, 183, 0.28),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 95% 100%,
+            rgba(16, 163, 109, 0.35),
+            transparent 35%
+        ),
+        linear-gradient(120deg, #052e24, #087f5b);
+    color: white;
+}
+
+.hero-content {
+    max-width: 700px;
+    position: relative;
+    z-index: 1;
+}
+
+
+
+.hero-tag,
+.section-tag {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.hero-tag {
+    color: #a7f3d0;
+}
+
+.hero h1 {
+    margin: 20px 0;
+    padding: 0;
+    background: none;
+    color: white;
+    font-size: clamp(36px, 5vw, 54px);
+    line-height: 1.2;
+    letter-spacing: -1.5px;
+    font-weight: 800;
+}
+
+.hero h1 span {
+    color: #6ee7b7;
+}
+
+.hero-content > p {
+    max-width: 550px;
+    margin: 0 0 26px;
+    color: #d1fae5;
+    font-size: 16px;
+}
+
+.hero-btn {
+    background: #a7f3d0;
+    color: #064e3b;
+    padding: 14px 24px;
+    border-radius: 9px;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.12);
+}
+
+.hero-btn:hover {
+    background: white;
+    color: #064e3b;
+    transform: translateY(-2px);
+}
+
+
+
+/* ===== DANH SÁCH SÂN ===== */
+.court-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 55px 30px 70px;
+}
+
+.section-heading {
+    margin-bottom: 28px;
+}
+
+.section-tag {
+    color: #07865b;
+}
+
+.section-heading h2 {
+    margin: 8px 0;
+    color: #123b2d;
+    font-size: 30px;
+    line-height: 1.3;
+}
+
+.section-heading p {
+    margin: 0;
+    color: #718078;
+}
+
+.court-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.court-card {
+    overflow: hidden;
+    min-width: 0;
+    background: #ffffff;
+    border: 1px solid #e2ebe5;
+    border-radius: 16px;
+    box-shadow: 0 5px 18px rgba(6, 78, 59, 0.06);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.court-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 30px rgba(6, 78, 59, 0.13);
+    border-color: #b7e4cc;
+}
+
+
+.court-image {
+    height: 190px;
+    position: relative;
+    overflow: hidden;
+    background: #e5f3eb;
+}
+
+.court-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.35s ease;
+}
+
+.court-card:hover .court-image img {
+    transform: scale(1.05);
+}
+
+.court-image span {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.95);
+    color: #065f46;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.court-image span {
+    padding: 5px 10px;
+    border-radius: 6px;
+    background: white;
+    color: #065f46;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.court-info {
+    padding: 20px;
+}
+
+.court-info h3 {
+    margin: 0 0 12px;
+    color: #123b2d;
+    font-size: 21px;
+    line-height: 1.4;
+    font-weight: 800;
+}
+
+.court-location {
+    margin: 0 0 10px;
+    color: #718078;
+    font-size: 13px;
+}
+
+.court-description {
+    min-height: 44px;
+    margin: 0 0 18px;
+    color: #64746b;
+    font-size: 14px;
+}
+
+.court-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-top: 16px;
+    border-top: 1px solid #edf1ee;
+}
+
+.price-label {
+    color: #718078;
+    font-size: 12px;
+}
+
+.court-price {
+    margin: 3px 0 0;
+    color: #07865b;
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.court-price small {
+    font-size: 11px;
+}
+
+/* ===== CHƯA CÓ DỮ LIỆU ===== */
+.empty-state {
+    grid-column: 1 / -1;
+    padding: 45px 20px;
+    border: 1px dashed #b7c9bd;
+    border-radius: 12px;
+    background: white;
+    text-align: center;
+}
+
+.empty-state h3 {
+    color: #087f5b;
+}
+
+.empty-state p {
+    color: #718078;
+}
+
+/* ===== CHÂN TRANG ===== */
+.site-footer {
+    padding: 32px 20px;
+    background: #073d2e;
+    color: #d1fae5;
+    text-align: center;
+}
+
+.site-footer .logo {
+    color: white;
+}
+
+.site-footer p {
+    margin: 8px 0;
+    font-size: 14px;
+}
+
+.site-footer .copyright {
+    margin-top: 20px;
+    color: #a7c8b7;
+    font-size: 12px;
+}
+
+/* ===== ĐĂNG NHẬP / ĐĂNG KÝ ===== */
+.form-container {
+    max-width: 420px;
+    margin: 35px auto;
+    padding: 28px;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+}
+
+.form-container label {
+    display: block;
+    margin: 15px 0 6px;
+    font-weight: bold;
+}
+
+.form-container input {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #d5ddd8;
+    border-radius: 7px;
+}
+
+.form-container button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    border: none;
+    border-radius: 7px;
+    background: #087f5b;
+    color: white;
+}
+
+.form-container a {
+    color: #087f5b;
+}
+
+/* ===== ĐIỆN THOẠI / MÀN HÌNH NHỎ ===== */
+@media (max-width: 850px) {
+    .court-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .site-header {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 600px) {
+    .site-header {
+        padding: 15px 5%;
+        gap: 14px;
+    }
+
+    .nav-links {
+        order: 3;
+        width: 100%;
+        gap: 18px;
+    }
+
+    .account {
+        gap: 10px;
+    }
+
+    .account > span {
+        max-width: 110px;
+        overflow-wrap: anywhere;
+    }
+
+    .hero {
+        min-height: 340px;
+        padding: 55px 6%;
+    }
+
+    .hero-content > p {
+        font-size: 14px;
+    }
+
+    .court-section {
+        padding: 40px 5%;
+    }
+
+    .section-heading h2 {
+        font-size: 25px;
+    }
+
+    .court-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .court-image {
+        height: 190px;
+    }
+
+    .form-container {
+        margin: 25px 5%;
+    }
+}
+
+
+.court-bottom .btn {
+    padding: 11px 20px;
+    border-radius: 9px;
+    box-shadow: 0 3px 8px rgba(7, 134, 91, 0.12);
+}
+
+.court-bottom .btn:hover {
+    box-shadow: 0 6px 14px rgba(7, 134, 91, 0.2);
+}
+
+
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: #10a36d;
+    transition: width 0.2s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.account {
+    flex-wrap: wrap;
+}
+
+.account form {
+    display: inline-block;
+}
+
+/* ===== GOSPORT: DARK NEON THEME ===== */
+
+body {
+    background: #0b1220;
+    color: #f1f5f9;
+}
+
+.site-header {
+    background: #101a2b;
+    border-bottom: 1px solid #263449;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+    color: #f8fafc;
+}
+
+.logo span {
+    color: #20e879;
+}
+
+.nav-links a,
+.account > a,
+.account > span {
+    color: #dbe4ef;
+}
+
+.nav-links a:hover,
+.account > a:hover {
+    color: #20e879;
+}
+
+.btn {
+    background: #20c96b;
+    color: #04140b;
+}
+
+.btn:hover {
+    background: #45f08b;
+    color: #04140b;
+}
+
+.btn-outline {
+    background: transparent;
+    color: #20e879;
+    border-color: #20e879;
+}
+
+.btn-outline:hover {
+    background: rgba(32, 232, 121, 0.1);
+    color: #45f08b;
+}
+
+.court-section {
+    color: #f1f5f9;
+}
+
+.section-heading h2,
+.court-info h3 {
+    color: #f1f5f9;
+}
+
+.section-heading p,
+.court-location,
+.court-description,
+.price-label {
+    color: #a7b4c7;
+}
+
+.court-card {
+    background: #111c2e;
+    border-color: #263449;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.15);
+}
+
+.court-card:hover {
+    border-color: #20c96b;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+}
+
+.court-bottom {
+    border-top-color: #263449;
+}
+
+.court-price,
+.section-tag {
+    color: #20e879;
+}
+
+.empty-state {
+    background: #111c2e;
+    border-color: #3c5067;
+}
+
+.empty-state h3 {
+    color: #20e879;
+}
+
+.empty-state p {
+    color: #a7b4c7;
+}
+
+.site-footer {
+    background: #050a13;
+    color: #cbd5e1;
+    border-top: 1px solid #20c96b;
+}
+
+.site-footer .copyright {
+    color: #8796aa;
+}
+
+.form-container {
+    background: #111c2e;
+    color: #f1f5f9;
+    border: 1px solid #263449;
+}
+
+.form-container input {
+    background: #0b1220;
+    color: #f1f5f9;
+    border-color: #35445a;
+}
+
+.form-container input:focus {
+    outline: 1px solid #20e879;
+    border-color: #20e879;
+}
+
+.form-container a {
+    color: #20e879;
+}
+
+/* ===== GOSPORT: HERO DARK NEON ===== */
+
+.hero {
+    position: relative;
+    overflow: hidden;
+    min-height: 440px;
+    padding: 75px 8%;
+    background:
+        radial-gradient(
+            ellipse at 85% 20%,
+            rgba(32, 232, 121, 0.16),
+            transparent 35%
+        ),
+        radial-gradient(
+            ellipse at 10% 100%,
+            rgba(32, 201, 107, 0.10),
+            transparent 40%
+        ),
+        #050a13;
+    color: #f8fafc;
+}
+
+.hero-content {
+    max-width: 850px;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-tag {
+    display: inline-block;
+    padding: 7px 13px;
+    border: 1px solid rgba(32, 232, 121, 0.5);
+    border-radius: 5px;
+    background: rgba(32, 232, 121, 0.08);
+    color: #20e879;
+    font-size: 11px;
+    letter-spacing: 1.8px;
+}
+
+.hero h1 {
+    margin: 22px 0 18px;
+    color: #f8fafc;
+    font-size: clamp(34px, 5vw, 58px);
+    font-weight: 900;
+    line-height: 1.15;
+    letter-spacing: -1.5px;
+}
+
+.hero h1 span {
+    color: #20e879;
+}
+
+.hero-content > p {
+    max-width: 580px;
+    color: #a7b4c7;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.hero-btn {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 14px 24px;
+    border: 1px solid #20e879;
+    border-radius: 7px;
+    background: #20c96b;
+    color: #04140b;
+    font-weight: 800;
+    box-shadow: 0 0 22px rgba(32, 232, 121, 0.12);
+}
+
+.hero-btn:hover {
+    background: #45f08b;
+    box-shadow: 0 0 28px rgba(32, 232, 121, 0.25);
+}
+
+
+/* ===== GOSPORT: NAVBAR ===== */
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    min-height: 78px;
+    padding: 14px 6%;
+    background: rgba(11, 18, 32, 0.96);
+    border-bottom: 1px solid #263449;
+    box-shadow: 0 5px 22px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(12px);
+}
+
+.logo {
+    font-size: 29px;
+    font-weight: 900;
+    letter-spacing: -1.2px;
+}
+
+.nav-links {
+    gap: 28px;
+}
+
+.nav-links a {
+    position: relative;
+    padding: 9px 0;
+    color: #cbd5e1;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: #20e879;
+}
+
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: #20e879;
+    transition: width 0.25s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.account {
+    gap: 14px;
+}
+
+.account .btn,
+.account .btn-outline {
+    border-radius: 6px;
+    font-weight: 800;
+}
+
+.account .btn-outline {
+    background: transparent;
+    color: #20e879;
+    border: 1px solid #20e879;
+}
+
+.account .btn-outline:hover {
+    background: rgba(32, 232, 121, 0.1);
+}
+
+
+
+
+
+
+/* ===== KHU VỰC ƯU ĐÃI GOSPORT (CĂN GIỮA CHUẨN XÁC) ===== */
+.promotion-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+    box-sizing: border-box;
+}
+
+.promotion-container {
+    width: 100%;
+    max-width: 650px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.promotion-heading {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.voucher-icon-circle {
+    font-size: 38px;
+    margin-bottom: 12px;
+}
+
+.promotion-tag {
+    color: #20e879;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+}
+
+.promotion-heading h2 {
+    font-size: 32px;
+    color: #f1f5f9;
+    margin: 8px 0;
+}
+
+.promotion-heading p {
+    color: #a7b4c7;
+    margin: 0;
+}
+
+/* Thẻ Voucher Card */
+.voucher-card {
+    width: 100%;
+    background: #111c2e;
+    border: 1px dashed #20e879;
+    border-radius: 16px;
+    padding: 35px 25px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.voucher-label {
+    font-size: 11px;
+    font-weight: 800;
+    color: #20e879;
+    letter-spacing: 1.5px;
+    margin: 0 0 10px;
+}
+
+.voucher-card h3 {
+    font-size: 30px;
+    color: #ffffff;
+    margin: 0 0 8px;
+    letter-spacing: 1px;
+}
+
+.voucher-discount {
+    font-size: 22px;
+    font-weight: 800;
+    color: #20e879;
+    margin: 0 0 12px;
+}
+
+.voucher-description {
+    color: #a7b4c7;
+    font-size: 14px;
+    margin: 0 0 24px;
+}
+
+.voucher-card .btn {
+    padding: 12px 30px;
+    font-size: 15px;
+    border-radius: 8px;
+}
+
+
+/* ===== 2. PHẦN TÍNH NĂNG / THANH TOÁN (3 CỘT) ===== */
+
+.features-section {
+    width: 100%;
+    background: #0e1726; 
+    border-top: 1px solid #1e293b;
+    border-bottom: 1px solid #1e293b;
+    padding: 70px 20px 40px;
+    margin: 50px 0;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.features-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.features-heading {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.features-heading h2 {
+    font-size: 28px;
+    color: #f1f5f9;
+    margin-top: 10px;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.feature-card {
+    background: #131f33; /* Màu thẻ con đậm hơn một chút để nổi trên nền block */
+    border: 1px solid #22324a;
+    border-radius: 16px;
+    padding: 35px 25px;
+    text-align: center;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    border-color: #20e879;
+}
+
+.feature-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 20px;
+    background: rgba(32, 232, 121, 0.1);
+    border: 1px solid rgba(32, 232, 121, 0.3);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    color: #20e879;
+}
+
+.feature-card h3 {
+    font-size: 20px;
+    color: #f1f5f9;
+    margin-bottom: 12px;
+}
+
+.feature-card p {
+    font-size: 14px;
+    color: #a7b4c7;
+    line-height: 1.6;
+    margin: 0;
+}
+
+
+.section-divider-line {
+    width: 100%;
+    max-width: 800px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #20e879, transparent);
+    margin: 60px auto 0 auto;
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba(32, 232, 121, 0.5);
+}
+
+
+@media (max-width: 850px) {
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== 3. KHU VỰC ƯU ĐÃI HIỆN ĐẠI (TÁCH BIỆT, ICON TO) ===== */
+.promotion-section {
+    width: 100%;
+    background: linear-gradient(180deg, transparent, rgba(16, 26, 43, 0.8), transparent);
+    padding: 70px 24px;
+    margin: 50px 0;
+    box-sizing: border-box;
+}
+
+.promotion-container {
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.promotion-heading {
+    margin-bottom: 35px;
+}
+
+/* Icon 🎟 được làm to và có hiệu ứng bóng sáng hiện đại */
+.voucher-icon-circle-large {
+    font-size: 56px;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 0 12px rgba(32, 232, 121, 0.4));
+    animation: bounceIcon 2s infinite ease-in-out;
+}
+
+@keyframes bounceIcon {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+
+.promotion-heading h2 {
+    font-size: 32px;
+    color: #f1f5f9;
+    margin: 8px 0;
+}
+
+.promotion-heading p {
+    color: #a7b4c7;
+    font-size: 15px;
+    margin: 0;
+}
+
+/* Thẻ Voucher dạng hiện đại (Ngang hoặc khối nổi bật) */
+.voucher-card-modern {
+    width: 100%;
+    background: linear-gradient(135deg, #111c2e 0%, #1a2942 100%);
+    border: 2px dashed #20e879;
+    border-radius: 20px;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.voucher-badge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #20e879;
+    color: #04140b;
+    font-size: 11px;
+    font-weight: 900;
+    padding: 6px 14px;
+    border-bottom-right-radius: 12px;
+    letter-spacing: 1px;
+}
+
+.voucher-content {
+    text-align: left;
+    flex: 1;
+    margin-top: 10px;
+}
+
+.voucher-label {
+    font-size: 11px;
+    font-weight: 800;
+    color: #20e879;
+    letter-spacing: 1.5px;
+    margin: 0 0 6px;
+}
+
+.voucher-card-modern h3 {
+    font-size: 32px;
+    color: #ffffff;
+    margin: 0 0 6px;
+    letter-spacing: 1px;
+    font-weight: 900;
+}
+
+.voucher-description {
+    color: #a7b4c7;
+    font-size: 13px;
+    margin: 0;
+}
+
+.voucher-btn {
+    padding: 14px 24px;
+    white-space: nowrap;
+    border-radius: 10px;
+    font-weight: 800;
+    box-shadow: 0 4px 15px rgba(32, 201, 107, 0.3);
+}
+
+/* Responsive cho màn hình nhỏ (Điện thoại) */
+@media (max-width: 850px) {
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .voucher-card-modern {
+        flex-direction: column;
+        text-align: center;
+        padding: 25px 20px;
+    }
+    .voucher-content {
+        text-align: center;
+    }
+    .voucher-btn {
+        width: 100%;
+    }
+}
+
+
+/* ===== KHUNG CHỨA ĐĂNG KÝ CHIA ĐÔI 6/4 (CHUẨN XÁC) ===== */
+.auth-main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 100px);
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.auth-split-card {
+    display: flex;
+    width: 100%;
+    max-width: 900px;
+    background: #111c2e;
+    border: 1px solid #263449;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    position: relative;
+}
+
+/* Cột trái (Form - 6 phần): Giới hạn chiều rộng để không bị tràn */
+.auth-form-side {
+    flex: 0 0 55%;
+    padding: 40px 30px 40px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 2;
+    box-sizing: border-box;
+}
+
+.auth-header h2 {
+    color: #f1f5f9;
+    font-size: 24px;
+    margin: 0 0 6px;
+    font-weight: 800;
+}
+
+.auth-header p {
+    color: #a7b4c7;
+    font-size: 13px;
+    margin: 0 0 20px;
+}
+
+/* Định dạng các ô input và label trong form đăng ký thẳng hàng tuyệt đối */
+.form-container-split {
+    width: 100%;
+}
+
+.form-container-split label {
+    display: block;
+    color: #cbd5e1;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    margin-top: 10px;
+}
+
+.form-container-split input {
+    width: 100%;
+    padding: 10px 12px;
+    background: #0b1220;
+    border: 1px solid #263449;
+    border-radius: 8px;
+    color: #f1f5f9;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+.form-container-split input:focus {
+    outline: none;
+    border-color: #20e879;
+    box-shadow: 0 0 8px rgba(32, 232, 121, 0.2);
+}
+
+.form-container-split button {
+    width: 100%;
+    padding: 11px;
+    margin-top: 20px;
+    background: #20c96b;
+    color: #04140b;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.form-container-split button:hover {
+    background: #45f08b;
+}
+
+.auth-footer-text {
+    margin-top: 16px;
+    text-align: center;
+    font-size: 13px;
+    color: #a7b4c7;
+}
+
+.auth-footer-text a {
+    color: #20e879;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.auth-footer-text a:hover {
+    text-decoration: underline;
+}
+
+/* Đường chéo sáng mờ ảo ngăn cách chính xác ở giữa */
+.auth-diagonal-line {
+    position: absolute;
+    top: -10px;
+    bottom: -10px;
+    left: 52%;
+    width: 3px;
+    background: linear-gradient(to bottom, rgba(32, 232, 121, 0.1), #20e879, rgba(32, 232, 121, 0.1));
+    transform: rotate(20deg);
+    box-shadow: 0 0 10px rgba(32, 232, 121, 0.5);
+    z-index: 4;
+    pointer-events: none;
+}
+
+/* Cột phải (Ảnh mẫu - 4 phần): Cắt góc chéo ôm gọn bên phải */
+.auth-image-side {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    background: #050a13;
+    clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+    margin-left: -5%;
+    z-index: 3;
+}
+
+.auth-image-side img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: 0.9;
+}
+
+.auth-image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 25px 20px 20px 45px;
+    background: linear-gradient(to top, rgba(5, 10, 19, 0.95), transparent);
+    color: #fff;
+    text-align: left;
+}
+
+.auth-image-overlay h3 {
+    font-size: 16px;
+    margin: 0 0 4px;
+    color: #20e879;
+    font-weight: 700;
+}
+
+.auth-image-overlay p {
+    font-size: 11px;
+    margin: 0;
+    color: #cbd5e1;
+}
+
+/* Responsive trên điện thoại */
+@media (max-width: 768px) {
+    .auth-split-card {
+        flex-direction: column;
+    }
+    .auth-form-side {
+        flex: 1;
+        padding: 30px 20px;
+    }
+    .auth-image-side {
+        height: 180px;
+        clip-path: none;
+        margin-left: 0;
+    }
+    .auth-diagonal-line {
+        display: none;
+    }
+}
+
+
+
+
+/* ===== BỐ CỤC ĐĂNG NHẬP: ẢNH TRÁI - FORM PHẢI (ĐƯỜNG CHÉO NGƯỢC \ ) ===== */
+
+.auth-split-card-reverse {
+    display: flex;
+    width: 100%;
+    max-width: 900px;
+    background: #111c2e;
+    border: 1px solid #263449;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    position: relative;
+}
+
+/* Cột trái (Ảnh mẫu - Cắt chéo cạnh phải) */
+.auth-image-side-reverse {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    background: #050a13;
+    clip-path: polygon(0 0, 85% 0, 100% 100%, 0% 100%);
+    z-index: 3;
+}
+
+.auth-image-side-reverse img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: 0.9;
+}
+
+/* Đường chéo sáng mờ ảo chiều ngược lại (\) */
+.auth-diagonal-line-reverse {
+    position: absolute;
+    top: -10px;
+    bottom: -10px;
+    left: 45%;
+    width: 3px;
+    background: linear-gradient(to bottom, rgba(32, 232, 121, 0.1), #20e879, rgba(32, 232, 121, 0.1));
+    transform: rotate(-20deg);
+    box-shadow: 0 0 10px rgba(32, 232, 121, 0.5);
+    z-index: 4;
+    pointer-events: none;
+}
+
+/* Cột phải (Form đăng nhập) */
+.auth-form-side-reverse {
+    flex: 0 0 55%;
+    padding: 40px 40px 40px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 2;
+    box-sizing: border-box;
+    margin-left: -5%;
+}
+
+/* Responsive khi xem trên điện thoại */
+@media (max-width: 768px) {
+    .auth-split-card-reverse {
+        flex-direction: column;
+    }
+    .auth-image-side-reverse {
+        height: 180px;
+        clip-path: none;
+    }
+    .auth-diagonal-line-reverse {
+        display: none;
+    }
+    .auth-form-side-reverse {
+        margin-left: 0;
+        padding: 30px 20px;
+    }
+}
+
+
+
+
+/* ===== TÙY CHỈNH BẢNG LỊCH SỬ ĐẶT SÂN (HIỂN THỊ RÕ NÉT) ===== */
+/* ===== ĐỊNH DẠNG LẠI BẢNG LỊCH SỬ ĐẶT SÂN (CHỮ RÕ NÉT, DỄ ĐỌC) ===== */
+
+/* Khung bọc bảng */
+table {
+    width: 100%;
+    max-width: 1100px;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background: #111c2e;
+    border: 1px solid #263449;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Phần tiêu đề bảng (Th) */
+th {
+    background: #087f5b;
+    color: #ffffff !important;
+    padding: 14px 18px;
+    font-weight: 700;
+    text-align: left;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+
+/* Các ô dữ liệu trong bảng (Td và các thẻ chữ bên trong) */
+td, td p, td span {
+    padding: 14px 18px;
+    color: black; /* Đổi sang màu xám sáng dịu mắt, không bị trắng lóa */
+    border-bottom: 1px solid #263449;
+    font-size: 14px;
+}
+
+/* Riêng tên sân hoặc thông tin chính cho nổi bật hơn một chút */
+td:first-child {
+    color: black;
+    font-weight: 600;
+}
+
+/* Hiệu ứng rê chuột vào từng dòng */
+tr:hover td {
+    background: rgba(32, 232, 121, 0.06);
+}
+
+/* Màu cho trạng thái (ví dụ đã hủy, đã đặt) */
+td .status-canceled, 
+td span {
+    color: #20e879 !important; /* Hoặc chỉnh màu tùy ý cho trạng thái */
+    font-weight: 600;
+}
+
+
+/* ===== BỐ CỤC TRANG ĐẶT SÂN CHIA 2 CỘT CÓ ẢNH MẪU ===== */
+.booking-container {
+    max-width: 850px !important; /* Mở rộng khung để chứa vừa 2 cột */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    align-items: flex-start;
+    padding: 35px;
+}
+
+/* Cột bên trái: Tiêu đề, thông tin sân và form */
+.booking-form-side {
+    flex: 1.2;
+    min-width: 280px;
+}
+
+/* Cột bên phải: Khung ảnh mẫu tương ứng với sân (đúng vị trí bạn khoanh đỏ) */
+.booking-image-side {
+    flex: 1;
+    min-width: 260px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.booking-image-side img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid #263449;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.booking-image-caption {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #cbd5e1;
+    text-align: center;
+    font-style: italic;
+}
+
+
+/* ===== ĐỊNH DẠNG KHUNG ĐẶT SÂN NẰM NGANG 2 CỘT ===== */
+
+.booking-container {
+    max-width: 900px !important;
+    margin: 40px auto;
+    padding: 35px;
+    background: #111c2e;
+    border: 1px solid #263449;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    color: #f1f5f9;
+
+    /* Ép hiển thị dạng 2 cột nằm ngang */
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 30px;
+    align-items: flex-start;
+    box-sizing: border-box;
+}
+
+/* Cột trái: Form thông tin */
+.booking-form-side {
+    flex: 1.2 !important;
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Cột phải: Khung ảnh mẫu */
+.booking-image-side {
+    flex: 1 !important;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.booking-image-side img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid #263449;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+/* Căn chỉnh các ô Input và Select trong form */
+.booking-form-side label {
+    display: block;
+    margin: 12px 0 5px;
+    font-weight: 600;
+    color: #cbd5e1;
+    font-size: 13px;
+}
+
+.booking-form-side input,
+.booking-form-side select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #263449;
+    border-radius: 8px;
+    background: #0b1220;
+    color: #f1f5f9;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.booking-form-side input:focus,
+.booking-form-side select:focus {
+    outline: none;
+    border-color: #20e879;
+    box-shadow: 0 0 8px rgba(32, 232, 121, 0.2);
+}
+
+.booking-form-side .btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    background: #20c96b;
+    color: #04140b;
+    border: none;
+    border-radius: 8px;
+    font-weight: 800;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background 0.2s;
+}
+
+.booking-form-side .btn:hover {
+    background: #45f08b;
+}
+
+.court-price {
+    color: #20e879;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 8px 0 12px;
+}
+
+/* Hỗ trợ Responsive trên điện thoại */
+@media (max-width: 768px) {
+    .booking-container {
+        flex-direction: column !important;
+        padding: 20px;
+    }
+    .booking-form-side,
+    .booking-image-side {
+        width: 100%;
+    }
+}
+
+
+/* ===== FOOTER GOSPORT MODERN DARK NEON ===== */
+
+.site-footer {
+    background-color: #050a13;
+    color: #a7b4c7;
+    border-top: 2px solid #20e879; /* Đường viền xanh neon đặc trưng ở cạnh trên */
+    padding-top: 40px;
+    margin-top: 50px;
+    font-size: 13px;
+}
+
+.footer-top {
+    max-width: 1150px;
+    margin: 0 auto;
+    padding: 0 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+/* ===== CĂN LỀ TRÁI CHO TẤT CẢ CÁC CỘT TRONG FOOTER ===== */
+
+.footer-col {
+    flex: 1;
+    min-width: 200px;
+    text-align: left !important; /* Ép buộc căn trái toàn bộ nội dung cột */
+}
+
+.footer-brand {
+    flex: 1.3;
+    text-align: left !important;
+}
+
+/* Căn chỉnh lại cụm logo ở cột 1 cho chuẩn lề trái */
+.footer-logo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start !important; /* Đảm bảo logo nằm sát trái */
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+/* Căn chỉnh cụm icon mạng xã hội ở cột 4 nằm sát trái */
+.social-links {
+    display: flex;
+    justify-content: flex-start !important; /* Đảm bảo các icon nằm sát trái */
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+
+.footer-col ul {
+    list-style: none !important; /* Loại bỏ hoàn toàn dấu chấm tròn */
+    padding-left: 0 !important;  /* Đưa các dòng dịch sát về bên trái */
+    margin: 0;
+}
+
+.footer-col ul li {
+    margin-bottom: 10px;
+}
+
+.footer-col ul li a {
+    color: #cbd5e1;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer-col ul li a:hover {
+    color: #20e879;
+}
+.social-btn {
+    width: 34px;
+    height: 34px;
+    background: #111c2e;
+    border: 1px solid #263449;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #cbd5e1;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 13px;
+    transition: all 0.2s ease;
+}
+
+.social-btn:hover {
+    background: #20e879;
+    color: #050a13;
+    border-color: #20e879;
+    box-shadow: 0 0 10px rgba(32, 232, 121, 0.4);
+}
+
+.footer-address {
+    line-height: 1.5;
+    color: #94a3b8;
+    margin: 0;
+}
+
+.footer-address b {
+    color: #cbd5e1;
+}
+
+/* Phần bản quyền dưới cùng */
+.footer-bottom {
+    border-top: 1px solid #1e293b;
+    text-align: center;
+    padding: 20px;
+    color: #64748b;
+    font-size: 12px;
+}
+
+.footer-bottom p {
+    margin: 0;
+}
+
+/* Responsive khi xem trên màn hình nhỏ */
+@media (max-width: 768px) {
+    .footer-top {
+        flex-direction: column;
+        gap: 25px;
+    }
+}

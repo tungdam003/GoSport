@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập - GoSport</title>
+    <link rel="stylesheet" href="{% static 'booking/style.css' %}">
+</head>
+<body>
+
+<main class="auth-main-container">
+    <div class="auth-split-card-reverse">
+        
+        <!-- CỘT TRÁI: Ảnh mẫu thể thao -->
+        <div class="auth-image-side-reverse">
+            <img src="{% static 'booking/images/bongban1.jpg' %}" alt="Ảnh mẫu GoSport">
+            <div class="auth-image-overlay">
+                <h3>GoSport Booking</h3>
+                <p>Nâng tầm trải nghiệm thể thao mỗi ngày.</p>
+            </div>
+        </div>
+
+        <!-- ĐƯỜNG CHÉO NGĂN CÁCH NGƯỢC HƯỚNG (\) -->
+        <div class="auth-diagonal-line-reverse"></div>
+
+        <!-- CỘT PHẢI: Form đăng nhập -->
+        <div class="auth-form-side-reverse">
+            <div class="auth-header">
+                <h2>Đăng nhập tài khoản</h2>
+                <p>Chào mừng bạn quay trở lại với GoSport.</p>
+            </div>
+
+            {% if messages %}
+                <div class="auth-messages">
+                    {% for message in messages %}
+                        <p class="error-msg">{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <form method="post" class="form-container-split">
+                {% csrf_token %}
+
+                <label for="username">Tên đăng nhập</label>
+                <input type="text" id="username" name="username" required autocomplete="username">
+
+                <label for="password">Mật khẩu</label>
+                <input type="password" id="password" name="password" required autocomplete="current-password">
+
+                <button type="submit" class="btn">Đăng nhập</button>
+            </form>
+
+            <div class="auth-footer-text">
+                <p>Chưa có tài khoản? <a href="{% url 'register' %}">Đăng ký ngay</a></p>
+                <p style="margin-top: 8px;"><a href="{% url 'home' %}">← Quay về trang chủ</a></p>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+</body>
+</html>
